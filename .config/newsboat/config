@@ -1,0 +1,66 @@
+auto-reload yes
+external-url-viewer "urlview"
+notify-always yes
+notify-program notify-send
+ignore-mode "display"
+
+bind-key j down
+bind-key k up
+#bind-key j next articlelist
+bind-key j next articlelist
+bind-key J next-feed articlelist
+bind-key K prev-feed articlelist
+bind-key G end
+bind-key g home
+bind-key d pagedown
+bind-key u pageup
+bind-key l open
+bind-key h quit
+bind-key a toggle-article-read
+bind-key n next-unread
+bind-key N prev-unread
+bind-key D pb-download
+bind-key U show-urls
+bind-key x pb-delete
+
+color listnormal cyan default
+color listfocus black yellow standout bold
+color listnormal_unread blue default
+color listfocus_unread yellow default bold
+color info cyan black bold
+color article white default bold
+
+#browser "firefox %u"
+browser linkhandler
+#macro t set browser "tsp youtube-dl --add-metadata -ic"; open-in-browser ; set browser linkhandler
+#macro a set browser "tsp youtube-dl --add-metadata -xic -f bestaudio/best"; open-in-browser ; set browser linkhandler
+#macro w set browser "w3m %u"; open-in-browser ; set browser "linkhandler %u"
+macro f set browser "firefox %u"; open-in-browser ; set browser "linkhandler %u"
+macro v set browser "setsid -f mpv" ; open-in-browser ; set browser linkhandler
+macro w set browser "lynx" ; open-in-browser ; set browser linkhandler
+macro c set browser "xsel -b <<<" ; open-in-browser ; set browser linkhandler
+
+# feedlist format and colours
+#feedlist-format "%?l?├──╼ %t &├───%t?"
+feedlist-format "%?l?│%4i %n %8u (%T) %t &├─────────╼ %t?"
+
+#highlight feedlist ".*─────.*" green
+
+highlight feedlist "[││]" green default bold
+highlight feedlist "├─.*" green default bold
+# article format and colours
+#articlelist-format "%?T? │ %2i %f  %t?"
+articlelist-format " │ %2i  %t"
+
+#highlight all "---.*---" yellow
+#highlight feedlist ".*(0/0))" black
+highlight article "(^Feed:.*|^Title:.*|^Author:.*)" cyan default bold
+highlight article "(^Link:.*|^Date:.*)" default default
+highlight article "https?://[^ ]+" green default
+highlight article "^(Title):.*$" blue default
+highlight article "\\[[0-9][0-9]*\\]" magenta default bold
+highlight article "\\[image\\ [0-9]+\\]" green default bold
+highlight article "\\[embedded flash: [0-9][0-9]*\\]" green default bold
+highlight article ":.*\\(link\\)$" cyan default
+highlight article ":.*\\(image\\)$" blue default
+highlight article ":.*\\(embedded flash\\)$" magenta default
